@@ -51,7 +51,7 @@ function he($settings) {
 
     //
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'http://ipv6.he.net/certification/login.php');
+    curl_setopt($ch, CURLOPT_URL, 'https://ipv6.he.net/certification/login.php');
     curl_setopt($ch, CURLOPT_POSTFIELDS, 'f_user=' . urlencode($settings->username) . '&f_pass=' . urlencode(md5($settings->password))) . '&Login=Login';
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -66,7 +66,7 @@ function he($settings) {
    // fwrite($fh, curl_exec($ch));
    // fclose($fh);
     
-    if (preg_match("/Either your username or your password is invalid./i", curl_exec($ch),$match))
+    if (preg_match("/Invalid username or password/i", curl_exec($ch),$match))
 	{
 	print "Login failed\n";
 	exit(1);
@@ -79,7 +79,7 @@ function he($settings) {
         curl_setopt($ch, CURLOPT_POST, 0);
 
         $pageHtml = curl_exec($ch);
-        preg_match("{\<div id='vote_record'\>(.*)\</div\>}", $pageHtml, $match);
+        preg_match("{\<div class=\"errorMessageBox\"\>(.*)\</div\>}", $pageHtml, $match);
         $nextq = FALSE;
         if (count($match) > 0) {
             if (preg_match("/Sorry, you've already submitted an IPv6/i", $match[1])) {
