@@ -52,7 +52,7 @@ function he($settings) {
     //
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, 'https://ipv6.he.net/certification/login.php');
-    curl_setopt($ch, CURLOPT_POSTFIELDS, 'f_user=' . urlencode($settings->username) . '&f_pass=' . urlencode(md5($settings->password))) . '&Login=Login';
+    curl_setopt($ch, CURLOPT_POSTFIELDS, 'f_user=' . urlencode($settings->username) . '&f_pass=' . urlencode($settings->password)) . '&Login=Login';
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_HEADER, 0);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
